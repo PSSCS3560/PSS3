@@ -1,3 +1,7 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class Task
 {
     private String uuid;
@@ -12,6 +16,10 @@ public class Task
         this.type = type;
         this.startTime = startTime;
         this.duration = duration;
+    }
+    public JSONObject toJSONObject()
+    {
+        return null;
     }
     public void setName(String name)
     {

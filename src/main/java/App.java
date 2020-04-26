@@ -9,7 +9,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        System.out.println( "Hello Wrld!" );
 //        JSONObject jsonObject = new JSONObject();
 //        jsonObject.put("Name", "Jason");
 //        jsonObject.put("Name1", "Alex");
@@ -21,7 +21,8 @@ public class App
 //            System.out.println(jsonObject.get(keyName));
 //        }
 
-        PSS pss = new PSS();
-        pss.scanFromJSONFile("Set1.json");
+        PSS pss = new PSS("Set1.json");
+        pss.scanFromJSONFile();
+        pss.edit();
     }
 }
