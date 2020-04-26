@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7a21ec5c-6881-461a-9f11-1af9b6b1bb4c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Set1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Set1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AntiTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AntiTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PSS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PSS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RecurringTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RecurringTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TransientTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TransientTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PSS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/PSS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-    </list>
+    <list default="true" id="7a21ec5c-6881-461a-9f11-1af9b6b1bb4c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +68,26 @@
       <option name="presentableId" value="Default" />
       <updated>1587843559164</updated>
     </task>
+    <task id="LOCAL-00001" summary="Implemented add, edit, and delete">
+      <created>1587936324669</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587936324669</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Implemented add, edit, and delete">
+      <created>1587936517640</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587936517640</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implemented add, edit, and delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented add, edit, and delete" />
   </component>
   <component name="WindowStateProjectService">
     <state x="140" y="91" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587928771683">
@@ -93,22 +98,26 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="415" y="227" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1368.872@0.0.1368.872" timestamp="1587928763754" />
-    <state width="1326" height="206" key="GridCell.Tab.0.bottom" timestamp="1587936153414">
+    <state x="303" y="5" key="CommitChangelistDialog2" timestamp="1587936515690">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="1326" height="206" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1587936153414" />
-    <state width="1326" height="206" key="GridCell.Tab.0.center" timestamp="1587936153413">
+    <state x="303" y="5" key="CommitChangelistDialog2/0.0.1368.872@0.0.1368.872" timestamp="1587936515690" />
+    <state width="1326" height="206" key="GridCell.Tab.0.bottom" timestamp="1587936591557">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="1326" height="206" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1587936153413" />
-    <state width="1326" height="206" key="GridCell.Tab.0.left" timestamp="1587936153413">
+    <state width="1326" height="206" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1587936591557" />
+    <state width="1326" height="206" key="GridCell.Tab.0.center" timestamp="1587936591557">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="1326" height="206" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1587936153413" />
-    <state width="1326" height="206" key="GridCell.Tab.0.right" timestamp="1587936153414">
+    <state width="1326" height="206" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1587936591557" />
+    <state width="1326" height="206" key="GridCell.Tab.0.left" timestamp="1587936591557">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="1326" height="206" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1587936153414" />
+    <state width="1326" height="206" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1587936591557" />
+    <state width="1326" height="206" key="GridCell.Tab.0.right" timestamp="1587936591557">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state width="1326" height="206" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1587936591557" />
     <state x="215" y="91" key="Maven.ArtifactSearchDialog" timestamp="1587928447054">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
@@ -117,6 +126,10 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="165" y="11" key="SettingsEditor/0.0.1368.872@0.0.1368.872" timestamp="1587928815662" />
+    <state x="277" y="169" key="Vcs.Push.Dialog.v2" timestamp="1587936520751">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="277" y="169" key="Vcs.Push.Dialog.v2/0.0.1368.872@0.0.1368.872" timestamp="1587936520751" />
     <state x="350" y="207" width="672" height="677" key="run.anything.popup" timestamp="1587928288765">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
