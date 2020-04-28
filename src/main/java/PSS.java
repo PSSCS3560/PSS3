@@ -119,7 +119,7 @@ public class PSS
                 }
                 break;
             case "Cancellation":
-                //TODO we gotta consider how to cancel an instance of a Recurring Task, for now we should add it into the schedule
+                //TODO we gotta  consider how to cancel an instance of a Recurring Task, for now we should add it into the schedule
                 System.out.println("What is the date?");
                 long cancelDate = scan.nextLong();
                 AntiTask antiTask = new AntiTask(name, type, startTime, duration, cancelDate);
