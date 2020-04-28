@@ -27,6 +27,10 @@ public class PSS
         date = new Date();
         today = formatter.format(date);
     }
+    public boolean checkConflict()
+    {
+        return false;
+    }
     public void viewToday()
     {
 
@@ -89,6 +93,11 @@ public class PSS
                 long endDate = scan.nextLong();
                 System.out.println("What is the frequency?");
                 long frequency = scan.nextLong();
+                if(checkConflict())
+                {
+                    System.out.println("Schedule Conflict");
+                    System.exit(0);
+                }
                 RecurringTask task = new RecurringTask(name, type, startTime,  duration,  startDate,  endDate,  frequency);
 
                 schedule.add(task);
@@ -116,6 +125,11 @@ public class PSS
             case "Appointment":
                 System.out.println("What is the date?-yyyyMMdd");
                 long date = scan.nextLong();
+                if(checkConflict())
+                {
+                    System.out.println("Schedule Conflict");
+                    System.exit(0);
+                }
                 TransientTask transTask = new TransientTask(name, type,startTime, duration, date);
 
                 schedule.add(transTask);
@@ -140,6 +154,11 @@ public class PSS
                 //TODO we gotta  consider how to cancel an instance of a Recurring Task, for now we should add it into the schedule
                 System.out.println("What is the date?");
                 long cancelDate = scan.nextLong();
+                if(checkConflict())
+                {
+                    System.out.println("Schedule Conflict");
+                    System.exit(0);
+                }
                 AntiTask antiTask = new AntiTask(name, type, startTime, duration, cancelDate);
                 schedule.add(antiTask);
                 JSONObject anti = new JSONObject();
@@ -168,8 +187,6 @@ public class PSS
         addedTask.put("Type", type);
         addedTask.put("StartTime", startTime);
         addedTask.put("Duration", duration);
-
-        System.out.println("adding");
     }
     public void delete()
     {
