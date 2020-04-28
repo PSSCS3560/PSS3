@@ -6,7 +6,7 @@ public class RecurringTask extends Task
     private long startDate;
     private long endDate;
     private long frequency;
-    public final String task = "Recurring";
+    public final String taskTypeString = "Recurring";
     public RecurringTask(String name, String type, long startTime, double duration, long startDate, long endDate, long frequency)
     {
         super(name, type, startTime, duration);

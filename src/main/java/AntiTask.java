@@ -4,7 +4,7 @@ import org.json.simple.parser.JSONParser;
 public class AntiTask extends Task
 {
     private long date;
-    public final String task = "Anti";
+    public final String taskTypeString = "Anti";
     public AntiTask(String name, String type, long startTime, double duration, long date)
     {
         super(name, type, startTime, duration);

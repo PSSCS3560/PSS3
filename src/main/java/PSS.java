@@ -63,7 +63,7 @@ public class PSS
                 long endDate = scan.nextLong();
                 System.out.println("What is the frequency?");
                 long frequency = scan.nextLong();
-                RecurringTask task = new RecurringTask(name,type, startTime,  duration,  startDate,  endDate,  frequency);
+                RecurringTask task = new RecurringTask(name, type, startTime,  duration,  startDate,  endDate,  frequency);
 //                do {
 //                    int rng = (int) (Math.random() * 1000);
 //                    uuid = Integer.toString(rng);
@@ -115,6 +115,25 @@ public class PSS
                 }
                 catch(IOException e)
                 {
+                    e.printStackTrace();
+                }
+                break;
+            case "Cancellation":
+                //TODO we gotta consider how to cancel an instance of a Recurring Task, for now we should add it into the schedule
+                System.out.println("What is the date?");
+                long cancelDate = scan.nextLong();
+                AntiTask antiTask = new AntiTask(name, type, startTime, duration, cancelDate);
+                schedule.add(antiTask);
+                JSONObject anti = new JSONObject();
+                anti.put("Name", name);
+                anti.put("Type", type);
+                anti.put("StartTime", startTime);
+                anti.put("Duration", duration);
+                anti.put("Date", cancelDate);
+                try(FileWriter file = new FileWriter(fileName)){
+                    file.write(anti.toJSONString());
+                    file.flush();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;

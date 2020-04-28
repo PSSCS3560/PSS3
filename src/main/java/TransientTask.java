@@ -5,7 +5,7 @@ import org.json.simple.parser.JSONParser;
 public class TransientTask extends Task
 {
     private long date;
-    public final String task = "Transient";
+    public final String taskTypeString = "Transient";
     public TransientTask(String name, String type, long startTime, double duration, long date)
     {
         super(name, type, startTime, duration);
