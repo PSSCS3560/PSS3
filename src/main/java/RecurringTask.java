@@ -52,4 +52,16 @@ public class RecurringTask extends Task
     {
         return frequency;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Name: " + this.getName()
+                + "\nType: " + this.getType()
+                + "\nStartDate: " + this.getStartDate()
+                + "\nStartTime: " + this.getStartTime()
+                + "\nDuration: " + this.getDuration()
+                + "\nEndDate " + this.getEndDate()
+                + "\nFrequency: " + this.getFrequency();
+    }
 }

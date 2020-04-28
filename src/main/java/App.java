@@ -11,15 +11,17 @@ public class App
     {
         System.out.println("Welcome to PSS");
         PSS schedule = new PSS("Set1.json");
+        schedule.scanFromJSONFile();
         int choice;
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Choice: (1 for add), (2 for edit), (3 for delete)");
         choice = scan.nextInt();
-        while(choice != 4) // there are more choices didnt add yet
+        while(true) // there are more choices didnt add yet
         {
 
             switch (choice) {
                 case 1: //adding method
+                    scan.nextLine();
                     schedule.add();
                     break;
                 case 2: // edit method
@@ -27,6 +29,15 @@ public class App
                     break;
                 case 3: // delete
                     schedule.delete();
+                    break;
+                case 4:
+                    schedule.viewToday();
+                    break;
+                case 5:
+                    schedule.viewWeek();
+                    break;
+                case 6:
+                    schedule.viewMonth();
                     break;
                 default:
                     System.out.println("Exiting. Goodbye");

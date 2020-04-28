@@ -30,4 +30,13 @@ public class TransientTask extends Task
     {
         return date;
     }
+    @Override
+    public String toString()
+    {
+        return "Name: " + this.getName()
+                + "\nType: " + this.getType()
+                + "\nStartTime: " + this.getStartTime()
+                + "\nDuration: " + this.getDuration()
+                + "\nDate " + this.getDate();
+    }
 }

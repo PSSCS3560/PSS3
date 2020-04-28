@@ -9,7 +9,7 @@ public class Task
     private String type;
     private long startTime;
     private double duration;
-
+    public String taskTypeString = "NA";
     public Task(String name, String type, long startTime, double duration)
     {
         this.name = name;
@@ -59,7 +59,13 @@ public class Task
     public String getUuid() {
         return uuid;
     }
-
+    public String toString()
+    {
+        return "Name: " + this.getName()
+                + "\nType: " + this.getType()
+                + "\nStartTime: " + this.getStartTime()
+                + "\nDuration: " + this.getDuration();
+    }
 
 
 }
