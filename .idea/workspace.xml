@@ -21,6 +21,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1087" />
+  </component>
   <component name="ProjectId" id="1b3MYV7zItkijsaMplaIYdkooYb" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
