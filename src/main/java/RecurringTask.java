@@ -70,9 +70,9 @@ public class RecurringTask extends Task
         long start = startDate;
         if(endDay - startDay <= 1)
         {
-            while(endDay >= start)
+            while(endDay >= start && start <= endDate)
             {
-                if(startDate == endDay)
+                if(start == endDay)
                 {
                     return true;
                 }
