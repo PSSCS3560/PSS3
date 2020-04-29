@@ -70,7 +70,7 @@ public class PSS
         List<Task> list = new ArrayList<>();
         for(int i = 0; i < schedule.size(); i++)
         {
-            if(schedule.get(i).ifInThatDate(today, today + 30))
+            if(schedule.get(i).ifInThatDate(today, today + 100))
             {
                 list.add(schedule.get(i));
             }
