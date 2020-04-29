@@ -33,9 +33,16 @@ public class AntiTask extends Task
     public String toString()
     {
         return "Name: " + this.getName()
-                + "\nType: " + this.getType()
-                + "\nStartTime: " + this.getStartTime()
-                + "\nDuration: " + this.getDuration()
-                + "\nDate " + this.getDate();
+                + ", Type: " + this.getType()
+                + ", StartTime: " + this.getStartTime()
+                + ", Duration: " + this.getDuration()
+                + ", Date " + this.getDate();
+    }
+    @Override
+    public boolean ifInThatDate(long startDay, long endDay)
+    {
+        if(date >=startDay && date <= endDay)
+            return true;
+        return false;
     }
 }

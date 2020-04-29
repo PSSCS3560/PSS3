@@ -14,7 +14,7 @@ public class App
         schedule.scanFromJSONFile();
         int choice;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Choice: (1 for add), (2 for edit), (3 for delete)");
+        System.out.println("Enter Choice:\n1: Add\n2: Edit\n3: Delete\n4: View Today\n5: View Week\n6: View Month\n7: View All");
         choice = scan.nextInt();
         while(true) // there are more choices didnt add yet
         {
@@ -39,11 +39,12 @@ public class App
                 case 6:
                     schedule.viewMonth();
                     break;
+                case 7: schedule.viewSchedule();
                 default:
                     System.out.println("Exiting. Goodbye");
                     System.exit(0);
             }
-            System.out.println("Enter Choice: (1 for add), (2 for edit), (3 for delete)");
+            System.out.println("Enter Choice:\n1: Add\n2: Edit\n3: Delete\n4: View Today\n5: View Week\n6: View Month\n7: View All");
             choice = scan.nextInt();
         }
     }

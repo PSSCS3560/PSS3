@@ -17,7 +17,7 @@ public class PSS
     String fileName;
     SimpleDateFormat formatter;
     Date date;
-    String today;
+    long today;
     public PSS(String file)
     {
         fileName = file;
@@ -25,7 +25,7 @@ public class PSS
         scan = new Scanner(System.in);
         formatter = new SimpleDateFormat("yyyyMMdd");
         date = new Date();
-        today = formatter.format(date);
+        today = Long.parseLong(formatter.format(date));
     }
     public boolean checkConflict()
     {
@@ -33,15 +33,53 @@ public class PSS
     }
     public void viewToday()
     {
+        List<Task> list = new ArrayList<>();
+        for(int i = 0; i < schedule.size(); i++)
+        {
+            if(schedule.get(i).ifInThatDate(today, today))
+            {
+                list.add(schedule.get(i));
+            }
 
+        }
+        for(int i = 0; i < list.size(); i++)
+        {
+            System.out.println(list.get(i));
+        }
     }
     public void viewWeek()
     {
 
+        List<Task> list = new ArrayList<>();
+        for(int i = 0; i < schedule.size(); i++)
+        {
+            if(schedule.get(i).ifInThatDate(today, today + 7))
+            {
+                list.add(schedule.get(i));
+            }
+
+        }
+        for(int i = 0; i < list.size(); i++)
+        {
+            System.out.println(list.get(i));
+        }
     }
     public void viewMonth()
     {
+        System.out.println(today);
+        List<Task> list = new ArrayList<>();
+        for(int i = 0; i < schedule.size(); i++)
+        {
+            if(schedule.get(i).ifInThatDate(today, today + 30))
+            {
+                list.add(schedule.get(i));
+            }
 
+        }
+        for(int i = 0; i < list.size(); i++)
+        {
+            System.out.println(list.get(i));
+        }
     }
     public void viewSchedule()
     {
@@ -180,7 +218,8 @@ public class PSS
 
         }
 
-        System.out.println(schedule.toString());
+        for(int i = 0; i < schedule.size(); i++)
+            System.out.println(schedule.get(i));
         this.rewriteToJSONFile();
         JSONObject addedTask = new JSONObject();
         addedTask.put("Name", name);

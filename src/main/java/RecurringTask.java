@@ -57,11 +57,31 @@ public class RecurringTask extends Task
     public String toString()
     {
         return "Name: " + this.getName()
-                + "\nType: " + this.getType()
-                + "\nStartDate: " + this.getStartDate()
-                + "\nStartTime: " + this.getStartTime()
-                + "\nDuration: " + this.getDuration()
-                + "\nEndDate " + this.getEndDate()
-                + "\nFrequency: " + this.getFrequency();
+                + ", Type: " + this.getType()
+                + ", StartDate: " + this.getStartDate()
+                + ", StartTime: " + this.getStartTime()
+                + ", Duration: " + this.getDuration()
+                + ", EndDate " + this.getEndDate()
+                + ", Frequency: " + this.getFrequency();
+    }
+    @Override
+    public boolean ifInThatDate(long startDay, long endDay)
+    {
+        long start = startDate;
+        if(endDay - startDay <= 1)
+        {
+            while(endDay >= start)
+            {
+                if(startDate == endDay)
+                {
+                    return true;
+                }
+                start += frequency;
+            }
+            return false;
+        }
+        if((startDay <= startDate && startDate <= endDay)||(startDay <= endDate && endDate <= endDay))
+            return true;
+        else return false;
     }
 }

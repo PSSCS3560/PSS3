@@ -66,6 +66,10 @@ public class Task
                 + "\nStartTime: " + this.getStartTime()
                 + "\nDuration: " + this.getDuration();
     }
+    public boolean ifInThatDate(long startDay, long endDay)
+    {
 
+        return false;
+    }
 
 }
