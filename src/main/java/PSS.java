@@ -1,10 +1,14 @@
+import java.beans.beancontext.BeanContext;
 import java.io.File;
 import java.io.FileReader;
+import java.time.LocalDate;
 import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ScheduledExecutorService;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,8 +31,15 @@ public class PSS
         date = new Date();
         today = Long.parseLong(formatter.format(date));
     }
-    public boolean checkConflict()
+    public boolean checkConflict(Task other)
     {
+        for(Task task : schedule)
+        {
+            double startTimeTask = task.getStartTime();
+            double endTimeTask = task.getDuration()+ (double)startTimeTask;
+            if( (double) other.getStartTime() >= startTimeTask && (double)other.getStartTime() <= endTimeTask  )
+                return true;
+        }
         return false;
     }
     public void viewToday()
@@ -131,13 +142,12 @@ public class PSS
                 long endDate = scan.nextLong();
                 System.out.println("What is the frequency?");
                 long frequency = scan.nextLong();
-                if(checkConflict())
+                RecurringTask task = new RecurringTask(name, type, startTime,  duration,  startDate,  endDate,  frequency);
+                if(checkConflict(task))
                 {
                     System.out.println("Schedule Conflict");
                     System.exit(0);
                 }
-                RecurringTask task = new RecurringTask(name, type, startTime,  duration,  startDate,  endDate,  frequency);
-
                 schedule.add(task);
                 JSONObject a = new JSONObject();
                 a.put("Name", name);
@@ -163,13 +173,12 @@ public class PSS
             case "Appointment":
                 System.out.println("What is the date?-yyyyMMdd");
                 long date = scan.nextLong();
-                if(checkConflict())
+                TransientTask transTask = new TransientTask(name, type,startTime, duration, date);
+                if(checkConflict(transTask))
                 {
                     System.out.println("Schedule Conflict");
                     System.exit(0);
                 }
-                TransientTask transTask = new TransientTask(name, type,startTime, duration, date);
-
                 schedule.add(transTask);
                 JSONObject t = new JSONObject();
                 t.put("Name", name);
@@ -192,25 +201,42 @@ public class PSS
                 //TODO we gotta  consider how to cancel an instance of a Recurring Task, for now we should add it into the schedule
                 System.out.println("What is the date?");
                 long cancelDate = scan.nextLong();
-                if(checkConflict())
+                boolean existConflict = false;
+                for(Task eachTask : schedule)
                 {
-                    System.out.println("Schedule Conflict");
+                    if(eachTask.getStartDate() == cancelDate && eachTask.getDuration() == duration && eachTask.getStartTime() == startTime)
+                    {
+                        existConflict = true;
+                        schedule.remove(schedule.indexOf(eachTask));
+                        break;
+                    }
+                }
+                if(!existConflict)
+                {
+                    System.out.println("There is no Recurring Task that take place at your given input!");
                     System.exit(0);
                 }
-                AntiTask antiTask = new AntiTask(name, type, startTime, duration, cancelDate);
-                schedule.add(antiTask);
-                JSONObject anti = new JSONObject();
-                anti.put("Name", name);
-                anti.put("Type", type);
-                anti.put("StartTime", startTime);
-                anti.put("Duration", duration);
-                anti.put("Date", cancelDate);
-                try(FileWriter file = new FileWriter(fileName)){
-                    file.write(anti.toJSONString());
-                    file.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                System.out.println("What is the date?");
+//                long cancelDate = scan.nextLong();
+//                if(checkConflict())
+//                {
+//                    System.out.println("Schedule Conflict");
+//                    System.exit(0);
+//                }
+//                AntiTask antiTask = new AntiTask(name, type, startTime, duration, cancelDate);
+//                schedule.add(antiTask);
+//                JSONObject anti = new JSONObject();
+//                anti.put("Name", name);
+//                anti.put("Type", type);
+//                anti.put("StartTime", startTime);
+//                anti.put("Duration", duration);
+//                anti.put("Date", cancelDate);
+//                try(FileWriter file = new FileWriter(fileName)){
+//                    file.write(anti.toJSONString());
+//                    file.flush();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 break;
             default:
                 System.out.println("Chose invalid type");
@@ -271,7 +297,6 @@ public class PSS
                 long startDate;
                 long startTime = (long) test.get("StartTime");
                 double duration = (double) test.get("Duration");
-                String uuid;
                 switch(type) {
                     case "Class":
                     case "Study":
@@ -282,33 +307,70 @@ public class PSS
                         startDate = (long) test.get("StartDate");
                         long endDate = (long) test.get("EndDate");
                         long frequency = (long) test.get("Frequency");
-                        RecurringTask newRTask = new RecurringTask(name, type, startTime, duration, startDate, endDate, frequency);
+//                        RecurringTask newRTask = new RecurringTask(name, type, startTime, duration, startDate, endDate, frequency);
+                        List<RecurringTask> newRTask = new RecurringTask(name, type, startTime, duration, startDate, endDate, frequency).generateRecurringTask();
+                        for(RecurringTask task : newRTask){
+                            if(checkConflict(task))
+                            {
+                                System.out.println("Conflict Occurred! Reading file failed! ");
+                                System.exit(0);
+                            }
+                            schedule.add(task);
+                        }
 
-                        schedule.add(newRTask);
                         break;
                     case "Visit":
                     case "Shopping":
                     case "Appointment":
                         startDate = (long) test.get("Date");
                         TransientTask newTTask = new TransientTask(name, type, startTime, duration, startDate);
-
+                        if(checkConflict(newTTask))
+                        {
+                            System.out.println("Conflict Occurred! Reading file failed! ");
+                            System.exit(0);
+                        }
                         schedule.add(newTTask);
                         break;
                     case "Cancellation":
                         startDate = (long) test.get("Date");
-                        AntiTask newATask = new AntiTask(name, type, startTime, duration, startDate);
-                        schedule.add(newATask);
+                        //Boolean to track if there are any schedule conflict with the Cancellation type or not
+//                        boolean existConflict = false;
+                        //Iterate through all the schedule to see if there is a schedule conflict
+                        for(Task a : schedule)
+                        {
+                            //check if the date , time and time are the same
+                            if(a.getStartDate() == startDate && a.getDuration() == duration && a.getStartTime() == startTime)
+                            {
+//                                existConflict = true;
+                                schedule.remove(schedule.indexOf(a));
+                                break;
+                            }
+                        }
+                        //if there is no existing schedule that conflict with the cancellation, just add the cancellation
+//                        if(!existConflict) { ;
+//                        AntiTask newATask = new AntiTask(name, type, startTime, duration, startDate);
+//                        schedule.add(newATask);
+//                        }
                         break;
                 }
-            }
-
-            for(Task task: schedule) {
-                System.out.println(task.getName());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //sort the schedule
+        Collections.sort(schedule, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if(o1.getStartDate() < o2.getStartDate())
+                    return -1;
+                else if (o1.getStartDate() == o2.getStartDate() ) {
+                    if(o1.getStartTime() < o2.getStartDate())
+                        return -1;
+                }
+                return 1;
+            }
+        });
     }
 
     }

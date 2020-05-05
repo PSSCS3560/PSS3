@@ -12,6 +12,7 @@ public class App
         System.out.println("Welcome to PSS");
         PSS schedule = new PSS("Set1.json");
         schedule.scanFromJSONFile();
+        schedule.viewSchedule();
         int choice;
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter Choice:\n1: Add\n2: Edit\n3: Delete\n4: View Today\n5: View Week\n6: View Month\n7: View All");

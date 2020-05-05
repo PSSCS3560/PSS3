@@ -9,18 +9,29 @@ public class Task
     private String type;
     private long startTime;
     private double duration;
+    private long startDate;
     public String taskTypeString = "NA";
-    public Task(String name, String type, long startTime, double duration)
+    public Task(String name, String type, long startTime, double duration, long startDate)
     {
         this.name = name;
         this.type = type;
         this.startTime = startTime;
         this.duration = duration;
+        this.startDate = startDate;
     }
     public JSONObject toJSONObject()
     {
         return null;
     }
+
+    public long getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
+    }
+
     public void setName(String name)
     {
         this.name = name;

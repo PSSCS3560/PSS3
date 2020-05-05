@@ -3,12 +3,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 public class AntiTask extends Task
 {
-    private long date;
     public final String taskTypeString = "Anti";
     public AntiTask(String name, String type, long startTime, double duration, long date)
     {
-        super(name, type, startTime, duration);
-        this.date = date;
+        super(name, type, startTime, duration, date);
     }
     @Override
     public JSONObject toJSONObject()
@@ -18,16 +16,16 @@ public class AntiTask extends Task
         object.put("Type", this.getType());
         object.put("StartTime", this.getStartTime());
         object.put("Duration", this.getDuration());
-        object.put("Date", date);
+        object.put("Date", this.getStartDate());
         return object;
     }
     public void setDate(int date)
     {
-        this.date = date;
+        this.setStartDate(date);
     }
     public long getDate()
     {
-        return date;
+        return this.getStartDate();
     }
     @Override
     public String toString()
@@ -41,7 +39,7 @@ public class AntiTask extends Task
     @Override
     public boolean ifInThatDate(long startDay, long endDay)
     {
-        if(date >=startDay && date <= endDay)
+        if(this.getStartDate() >=startDay && this.getStartDate() <= endDay)
             return true;
         return false;
     }

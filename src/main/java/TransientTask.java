@@ -4,12 +4,10 @@ import org.json.simple.parser.JSONParser;
 
 public class TransientTask extends Task
 {
-    private long date;
     public final String taskTypeString = "Transient";
     public TransientTask(String name, String type, long startTime, double duration, long date)
     {
-        super(name, type, startTime, duration);
-        this.date = date;
+        super(name, type, startTime, duration, date);
     }
     @Override
     public JSONObject toJSONObject()
@@ -19,16 +17,16 @@ public class TransientTask extends Task
         object.put("Type", this.getType());
         object.put("StartTime", this.getStartTime());
         object.put("Duration", this.getDuration());
-        object.put("Date", date);
+        object.put("Date", this.getStartDate());
         return object;
     }
     public void setDate(long date)
     {
-        this.date = date;
+        this.setStartDate(date);
     }
     public long getDate()
     {
-        return date;
+        return this.getStartDate();
     }
     @Override
     public String toString()
@@ -42,7 +40,7 @@ public class TransientTask extends Task
     @Override
     public boolean ifInThatDate(long startDay, long endDay)
     {
-        if(date >=startDay && date <= endDay)
+        if(this.getStartDate() >=startDay && this.getStartDate() <= endDay)
             return true;
         return false;
     }
