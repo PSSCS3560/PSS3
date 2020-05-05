@@ -37,7 +37,7 @@ public class PSS
         {
             double startTimeTask = task.getStartTime();
             double endTimeTask = task.getDuration()+ (double)startTimeTask;
-            if( (double) other.getStartTime() >= startTimeTask && (double)other.getStartTime() <= endTimeTask  )
+            if( (double) other.getStartTime() >= startTimeTask && (double)other.getStartTime() <= endTimeTask && other.getStartDate() == task.getStartDate() )
                 return true;
         }
         return false;
@@ -291,6 +291,7 @@ public class PSS
 
             JSONArray values = (JSONArray) obj;
             for(Object object: values) {
+//                System.out.println("here");
                 JSONObject test = (JSONObject) object;
                 String name = (String) test.get("Name");
                 String type = (String) test.get("Type");
