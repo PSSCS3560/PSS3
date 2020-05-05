@@ -1,28 +1,23 @@
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.util.*;
-/**
- * Hello world!
- *
- */
-public class App
-{
-    public static void main( String[] args )
-    {
-        System.out.println("Welcome to PSS");
-        PSS schedule = new PSS("Set1.json");
-        schedule.scanFromJSONFile();
-        schedule.viewSchedule();
-        int choice;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Choice:\n1: Add\n2: Edit\n3: Delete\n4: View Today\n5: View Week\n6: View Month\n7: View All");
-        choice = scan.nextInt();
-        while(true) // there are more choices didnt add yet
-        {
 
+import java.util.*;
+
+//TODO Left over task: WriteToday, WriteWeek, WriteMonth
+//TODO we also need to fix rewriteToJSONFile: make sure to add recurring instance like transient task instead of recurring class
+
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Welcome to PSS");
+        PSS schedule = new PSS();
+        Scanner scan = new Scanner(System.in);
+        int choice;
+        while (true) {
+
+            System.out.println("1: Add\n2: Edit\n3: Delete\n4: View Today\n5: View Week\n6: View Month\n7: View All\n" +
+                    "8: Read Schedules from file\n9: Write Schedules to File\n10: Exit\nEnter Choice:");
+            choice = Integer.parseInt(scan.nextLine());
+            System.out.println();
             switch (choice) {
                 case 1: //adding method
-                    scan.nextLine();
                     schedule.add();
                     break;
                 case 2: // edit method
@@ -40,13 +35,23 @@ public class App
                 case 6:
                     schedule.viewMonth();
                     break;
-                case 7: schedule.viewSchedule();
+                case 7:
+                    schedule.viewSchedule();
+                    break;
+                case 8:
+                    System.out.println("Input the file name you want to read from(e.g. Set1.json): ");
+                    schedule.scanFromJSONFile(scan.nextLine().trim());
+                    break;
+                case 9:
+                    System.out.println("Input the file name you want to write to (e.g. Set1.json): ");
+                    schedule.rewriteToJSONFile(scan.nextLine().trim());
+                    break;
                 default:
                     System.out.println("Exiting. Goodbye");
                     System.exit(0);
+                    break;
             }
-            System.out.println("Enter Choice:\n1: Add\n2: Edit\n3: Delete\n4: View Today\n5: View Week\n6: View Month\n7: View All");
-            choice = scan.nextInt();
+
         }
     }
 }
