@@ -12,8 +12,8 @@ public class App {
         int choice;
         while (true) {
 
-            System.out.println("1: Add\n2: Edit\n3: Delete\n4:View Schedule\n" +
-                    "5: Read Schedules from file\n6: Write Schedules to File\n7: Exit\nEnter Choice:");
+            System.out.println("1: Add\n2: Edit\n3: Delete\n4: View Schedule\n" +
+                    "5: Read Schedules from file\n6: Write All Schedules to File\n7: Exit\nEnter Choice:");
             choice = Integer.parseInt(scan.nextLine());
             System.out.println();
             switch (choice) {
@@ -33,12 +33,27 @@ public class App {
                     {
                         case 1:
                             schedule.viewToday();
+                            System.out.println("Do you want to write to file? [Y/N] ");
+                            if(scan.nextLine().toUpperCase().equals("Y")) {
+                                System.out.println("Input the valid file name:");
+                                schedule.writeToday(scan.nextLine());
+                            }
                             break;
                         case 2:
                             schedule.viewWeek();
+                            System.out.println("Do you want to write to file? [Y/N] ");
+                            if(scan.nextLine().toUpperCase().equals("Y")) {
+                                System.out.println("Input the valid file name:");
+                                schedule.writeWeek(scan.nextLine());
+                            }
                             break;
                         case 3:
                             schedule.viewMonth();
+                            System.out.println("Do you want to write to file? [Y/N] ");
+                            if(scan.nextLine().toUpperCase().equals("Y")) {
+                                System.out.println("Input the valid file name:");
+                                schedule.writeMonth(scan.nextLine());
+                            }
                             break;
                         case 4:
                             schedule.viewSchedule();

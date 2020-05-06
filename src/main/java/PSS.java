@@ -19,12 +19,6 @@ import static java.time.temporal.TemporalAdjusters.nextOrSame;
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
 public class PSS {
-    public static void main(String[] args) {
-        LocalDate todaydate = LocalDate.of(2020,6,1);
-        System.out.println("Months first date in yyyy-mm-dd: " +todaydate.lengthOfMonth());
-        LocalDate firstDayOfMonth = LocalDate.now().withDayOfMonth(1);
-        System.out.println(firstDayOfMonth);
-    }
 
     private List<Task> schedule;
 
@@ -55,7 +49,7 @@ public class PSS {
         return false;
     }
 
-    public void viewToday() {
+    public List<Task> viewToday() {
 
         List<Task> list = new ArrayList<>();
         long today = Long.parseLong(LocalDate.now().format(formatter));
@@ -81,11 +75,11 @@ public class PSS {
         }
         if (list.isEmpty())
             System.out.println("You have no schedule for Today!");
-
+        return list;
 
     }
 
-    public void viewWeek() {
+    public List<Task> viewWeek() {
 //        LocalDate today = LocalDate.of(2020,5,12);
 
         long monday = Long.parseLong(today.with(previousOrSame(MONDAY)).format(formatter));
@@ -117,9 +111,10 @@ public class PSS {
         }
         if (list.isEmpty())
             System.out.println("You have no schedule for this week!");
+        return list;
     }
 
-    public void viewMonth() {
+    public List<Task> viewMonth() {
 
         List<Task> list = new ArrayList<>();
         long firstDayOfMonth = Long.parseLong(today.withDayOfMonth(1).format(formatter));
@@ -146,12 +141,53 @@ public class PSS {
         }
         if (list.isEmpty())
             System.out.println("You have no schedule for this month!");
+        return list;
     }
 
     public void viewSchedule() {
         for (int i = 0; i < schedule.size(); i++) {
             System.out.println(schedule.get(i));
         }
+    }
+    public void rewriteToJSONFile(String fileName,JSONArray array)
+    {
+        try (FileWriter f = new FileWriter(fileName)) {
+            f.write(array.toJSONString());
+            f.flush();
+        } catch (IOException e) {
+            System.out.println("File Not Found!");
+        }
+    }
+
+    public void writeToday(String filename)
+    {
+        List<Task> tasks= viewToday();
+        JSONArray array = new JSONArray();
+        for(Task a : tasks)
+        {
+            array.add(a.toJSONObject());
+        }
+        rewriteToJSONFile(filename, array);
+    }
+    public void writeWeek(String filename)
+    {
+        List<Task> tasks= viewWeek();
+        JSONArray array = new JSONArray();
+        for(Task a : tasks)
+        {
+            array.add(a.toJSONObject());
+        }
+        rewriteToJSONFile(filename, array);
+    }
+    public void writeMonth(String filename)
+    {
+        List<Task> tasks= viewMonth();
+        JSONArray array = new JSONArray();
+        for(Task a : tasks)
+        {
+            array.add(a.toJSONObject());
+        }
+        rewriteToJSONFile(filename, array);
     }
 
     //TODO Need to make sure that Recurring Instances have the same format as Transient Task
