@@ -1,4 +1,8 @@
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,29 +13,32 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.DayOfWeek.SUNDAY;
+import static java.time.temporal.TemporalAdjusters.nextOrSame;
+import static java.time.temporal.TemporalAdjusters.previousOrSame;
+
 public class PSS {
-    public static void main(String[] args) throws IOException {
-        try (FileReader writer = new FileReader("Set1.json")) {
-            System.out.println("here1");
-        } catch (Exception e) {
-            System.out.println("here2");
-        }
-        ;
+    public static void main(String[] args) {
+        LocalDate todaydate = LocalDate.of(2020,6,1);
+        System.out.println("Months first date in yyyy-mm-dd: " +todaydate.lengthOfMonth());
+        LocalDate firstDayOfMonth = LocalDate.now().withDayOfMonth(1);
+        System.out.println(firstDayOfMonth);
     }
 
     private List<Task> schedule;
 
     Scanner scan;
-    SimpleDateFormat formatter;
+    DateTimeFormatter formatter;
     Date date;
-    long today;
+    LocalDate today;
 
     public PSS() {
         schedule = new ArrayList<>();
         scan = new Scanner(System.in);
-        formatter = new SimpleDateFormat("yyyyMMdd");
+        formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         date = new Date();
-        today = Long.parseLong(formatter.format(date));
+        today = LocalDate.now();
     }
 
     public boolean checkConflict(Task other) {
@@ -49,14 +56,26 @@ public class PSS {
     }
 
     public void viewToday() {
+
         List<Task> list = new ArrayList<>();
+        long today = Long.parseLong(LocalDate.now().format(formatter));
         for (int i = 0; i < schedule.size(); i++) {
-            if (schedule.get(i).ifInThatDate(today, today)) {
+            if (schedule.get(i).getStartDate() == today) {
                 list.add(schedule.get(i));
             }
-
         }
-
+        Collections.sort(list, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if (o1.getStartDate() < o2.getStartDate())
+                    return -1;
+                else if (o1.getStartDate() == o2.getStartDate()) {
+                    if (o1.getStartTime() < o2.getStartDate())
+                        return -1;
+                }
+                return 1;
+            }
+        });
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -67,14 +86,32 @@ public class PSS {
     }
 
     public void viewWeek() {
+//        LocalDate today = LocalDate.of(2020,5,12);
+
+        long monday = Long.parseLong(today.with(previousOrSame(MONDAY)).format(formatter));
+        long sunday = Long.parseLong(today.with(previousOrSame(SUNDAY)).format(formatter));
+
 
         List<Task> list = new ArrayList<>();
         for (int i = 0; i < schedule.size(); i++) {
-            if (schedule.get(i).ifInThatDate(today, today + 7)) {
+            if(schedule.get(i).getStartDate() >= monday && schedule.get(i).getStartDate() <= sunday)
+            {
                 list.add(schedule.get(i));
             }
-
         }
+        Collections.sort(list, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if (o1.getStartDate() < o2.getStartDate())
+                    return -1;
+                else if (o1.getStartDate() == o2.getStartDate()) {
+                    if (o1.getStartTime() < o2.getStartDate())
+                        return -1;
+                }
+                return 1;
+            }
+        });
+
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -83,14 +120,27 @@ public class PSS {
     }
 
     public void viewMonth() {
-        System.out.println(today);
+
         List<Task> list = new ArrayList<>();
+        long firstDayOfMonth = Long.parseLong(today.withDayOfMonth(1).format(formatter));
         for (int i = 0; i < schedule.size(); i++) {
-            if (schedule.get(i).ifInThatDate(today, today + 100)) {
+            if(schedule.get(i).getStartDate() >= firstDayOfMonth && schedule.get(i).getStartDate() <= firstDayOfMonth+today.lengthOfMonth() -1)
+            {
                 list.add(schedule.get(i));
             }
-
         }
+        Collections.sort(list, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if (o1.getStartDate() < o2.getStartDate())
+                    return -1;
+                else if (o1.getStartDate() == o2.getStartDate()) {
+                    if (o1.getStartTime() < o2.getStartDate())
+                        return -1;
+                }
+                return 1;
+            }
+        });
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -251,7 +301,6 @@ public class PSS {
                         startDate = (long) test.get("StartDate");
                         long endDate = (long) test.get("EndDate");
                         long frequency = (long) test.get("Frequency");
-//                        RecurringTask newRTask = new RecurringTask(name, type, startTime, duration, startDate, endDate, frequency);
                         List<RecurringTask> newRTask = new RecurringTask(name, type, startTime, duration, startDate, endDate, frequency).generateRecurringTask();
                         for (RecurringTask task : newRTask) {
                             if (checkConflict(task)) {

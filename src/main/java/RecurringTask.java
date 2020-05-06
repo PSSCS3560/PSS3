@@ -100,8 +100,6 @@ public class RecurringTask extends Task {
                 + ", StartDate: " + this.getStartDate()
                 + ", StartTime: " + this.getStartTime()
                 + ", Duration: " + this.getDuration();
-//                + ", EndDate " + this.getEndDate()
-//                + ", Frequency: " + this.getFrequency();
     }
 
     @Override
