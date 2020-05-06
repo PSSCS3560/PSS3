@@ -1,9 +1,6 @@
 
 import java.util.*;
 
-//TODO Left over task: WriteToday, WriteWeek, WriteMonth
-//TODO we also need to fix rewriteToJSONFile: make sure to add recurring instance like transient task instead of recurring class
-
 public class App {
     public static void main(String[] args) {
         System.out.println("Welcome to PSS");
@@ -13,8 +10,16 @@ public class App {
         while (true) {
 
             System.out.println("1: Add\n2: Edit\n3: Delete\n4: View Schedule\n" +
-                    "5: Read Schedules from file\n6: Write All Schedules to File\n7: Exit\nEnter Choice:");
-            choice = Integer.parseInt(scan.nextLine());
+                    "5: Read Schedules from file\n6: Write All Schedules to File\n7: Find\n8: Exit\nEnter Choice:");
+            try {
+                choice = Integer.parseInt(scan.nextLine());
+            }
+            catch (Exception e )
+            {
+                System.out.println("Invalid input!");
+                System.out.println();
+                continue;
+            }
             System.out.println();
             switch (choice) {
                 case 1: //adding method
@@ -71,6 +76,9 @@ public class App {
                 case 6:
                     System.out.println("Input the file name you want to write to (e.g. Set1.json): ");
                     schedule.rewriteToJSONFile(scan.nextLine().trim());
+                    break;
+                case 7:
+                    schedule.find();
                     break;
                 default:
                     System.out.println("Exiting. Goodbye");

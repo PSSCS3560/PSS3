@@ -1,12 +1,9 @@
 import java.io.FileReader;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.json.simple.JSONArray;
@@ -148,6 +145,7 @@ public class PSS {
         for (int i = 0; i < schedule.size(); i++) {
             System.out.println(schedule.get(i));
         }
+        System.out.println();
     }
     public void rewriteToJSONFile(String fileName,JSONArray array)
     {
@@ -233,6 +231,7 @@ public class PSS {
                     break;
                 }
                 schedule.add(task);
+                System.out.println("Added Successfully!");
                 break;
             case "Visit":
             case "Shopping":
@@ -245,6 +244,7 @@ public class PSS {
                     break;
                 }
                 schedule.add(transTask);
+                System.out.println("Added Successfully!");
                 break;
             case "Cancellation":
                 //TODO we gotta  consider how to cancel an instance of a Recurring Task, for now we should add it into the schedule
@@ -255,6 +255,7 @@ public class PSS {
                     if (eachTask.getStartDate() == cancelDate && eachTask.getDuration() == duration && eachTask.getStartTime() == startTime) {
                         existConflict = true;
                         schedule.remove(schedule.indexOf(eachTask));
+                        System.out.println("Added Successfully!");
                         break;
                     }
                 }
@@ -282,8 +283,8 @@ public class PSS {
             }
         });
 
-        for (int i = 0; i < schedule.size(); i++)
-            System.out.println(schedule.get(i));
+//        for (int i = 0; i < schedule.size(); i++)
+//            System.out.println(schedule.get(i));
     }
 
     public void delete() {
@@ -295,6 +296,17 @@ public class PSS {
             }
         }
 
+
+    }
+
+    public void find(){
+        System.out.println("What is the task's name that you want to find?");
+        String name = scan.nextLine();
+        for (int i = 0; i < schedule.size(); i++) {
+            if (schedule.get(i).getName().equals(name)) {
+                System.out.println(schedule.get(i));
+            }
+        }
 
     }
 
@@ -391,6 +403,8 @@ public class PSS {
                     }
                 });
                 schedule = new ArrayList<>(tempSchedule);
+                System.out.println("Added successfully!");
+
             } else {
                 System.out.println("Please adjust your Schedule JSON and Read the file again!");
             }
