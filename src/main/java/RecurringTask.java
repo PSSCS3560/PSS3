@@ -102,20 +102,5 @@ public class RecurringTask extends Task {
                 + ", Duration: " + this.getDuration();
     }
 
-    @Override
-    public boolean ifInThatDate(long startDay, long endDay) {
-        long start = this.getStartDate();
-        if (endDay - startDay <= 1) {
-            while (endDay >= start && start <= endDate) {
-                if (start == endDay) {
-                    return true;
-                }
-                start += frequency;
-            }
-            return false;
-        }
-        if ((startDay <= this.getStartDate() && this.getStartDate() <= endDay) || (startDay <= endDate && endDate <= endDay))
-            return true;
-        else return false;
-    }
+
 }

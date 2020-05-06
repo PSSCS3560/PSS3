@@ -89,7 +89,7 @@ public class PSS {
 //        LocalDate today = LocalDate.of(2020,5,12);
 
         long monday = Long.parseLong(today.with(previousOrSame(MONDAY)).format(formatter));
-        long sunday = Long.parseLong(today.with(previousOrSame(SUNDAY)).format(formatter));
+        long sunday = Long.parseLong(today.with(nextOrSame(SUNDAY)).format(formatter));
 
 
         List<Task> list = new ArrayList<>();

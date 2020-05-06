@@ -1,6 +1,9 @@
 import org.json.simple.JSONObject;
 
 public class Task {
+    public static void main(String[] args) {
+        System.out.println("hello");
+    }
     private String uuid;
     private String name;
     private String type;
@@ -76,9 +79,5 @@ public class Task {
                 + "\nDuration: " + this.getDuration();
     }
 
-    public boolean ifInThatDate(long startDay, long endDay) {
-
-        return false;
-    }
 
 }

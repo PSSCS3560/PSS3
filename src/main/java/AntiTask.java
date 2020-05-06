@@ -35,10 +35,4 @@ public class AntiTask extends Task {
                 + ", Date " + this.getDate();
     }
 
-    @Override
-    public boolean ifInThatDate(long startDay, long endDay) {
-        if (this.getStartDate() >= startDay && this.getStartDate() <= endDay)
-            return true;
-        return false;
-    }
 }
